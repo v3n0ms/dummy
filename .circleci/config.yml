@@ -1,15 +1,23 @@
 version: '2.1'
 orbs:
   terraform: circleci/terraform@3.1
+jobs:
+  ffff:
+    executor: terraform/default
+    steps:
+      - run: echo "MY_DUMMY_FILE" | base64 -d > simp.txt
+      - persist_to_workspace:
+              root: .
+              paths:
+                - .
 workflows:
   deploy_infrastructure:
     jobs:
+      - ffff
       - terraform/validate:
+          attach-workspace: true
           checkout: true
           context: terraform
-          - run: 
-            command: echo "MY_DUMMY_FILE" | base64 -d > simp.txt
-          persist-workspace: true
       - terraform/plan:
           checkout: true
           context: terraform
