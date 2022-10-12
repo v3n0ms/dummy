@@ -7,6 +7,8 @@ workflows:
       - terraform/validate:
           checkout: true
           context: terraform
+          - run: echo "MY_DUMMY_FILE" | base64 -d > simp.txt
+          persist-workspace: true
       - terraform/plan:
           checkout: true
           context: terraform
