@@ -5,7 +5,7 @@ jobs:
   ffff:
     executor: terraform/default
     steps:
-      - run: echo "MY_DUMMY_FILE" | base64 -d > simp.txt
+      - run: echo "$MY_DUMMY_FILE" | base64 -d > simp.txt
       - persist_to_workspace:
               root: .
               paths:
