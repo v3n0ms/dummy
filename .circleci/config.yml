@@ -21,6 +21,7 @@ workflows:
           requires:
             - ffff
       - terraform/plan:
+          attach-workspace: true
           checkout: true
           context: terraform
           persist-workspace: true
