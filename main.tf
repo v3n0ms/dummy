@@ -1,23 +1,23 @@
 resource "google_compute_instance" "default" {
-    name = "retail-pos-helloworld"
-    machine_type = "f1-micro"
-    zone = "asia-south1-b"
+  name         = "retail-pos-helloworld"
+  machine_type = "f1-micro"
+  zone         = "asia-south1-b"
 
-    boot_disk {
-      initialize_params{
-        image = "debian-cloud/debian-11"
-      }
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
     }
-    network_interface {
-      network = google_compute_network.default.name
+  }
+  network_interface {
+    network = google_compute_network.default.name
 
-      access_config{
+    access_config {
 
-      }
     }
+  }
 
-    metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y &&  echo 'hello world' | sudo tee /var/www/html/index.html"
-    tags = [ "http-server" ]
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y &&  echo 'hello world' | sudo tee /var/www/html/index.html"
+  tags                    = ["http-server"]
 }
 
 resource "google_compute_firewall" "http-server" {
@@ -36,6 +36,6 @@ resource "google_compute_firewall" "http-server" {
 
 output "ip" {
 
-  value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
+  value = google_compute_instance.default.network_interface.0.access_config.0.nat_ip
 
 }
