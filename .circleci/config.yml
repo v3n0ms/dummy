@@ -18,6 +18,8 @@ workflows:
           attach-workspace: true
           checkout: true
           context: terraform
+          requires:
+            - ffff
       - terraform/plan:
           checkout: true
           context: terraform
