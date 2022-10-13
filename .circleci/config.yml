@@ -15,7 +15,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: terraform destroy
+      - run: terraform destroy -auto-approve
       - persist_to_workspace:
               root: .
               paths:
