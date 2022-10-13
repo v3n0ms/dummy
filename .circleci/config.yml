@@ -33,14 +33,8 @@ workflows:
           persist-workspace: true
           requires:
             - terraform/validate
-      - terraform/apply:
-          attach-workspace: true
-          context: terraform
-          persist-workspace: true
-          requires:
-            - terraform/plan
       - terraform/destroy:
           attach-workspace: true
           context: terraform
           requires:
-            - terraform/apply            
+            - terraform/plan          
