@@ -15,7 +15,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: rm .terraform.lock.hcl; terraform init
+      - run: ls -la
       - persist_to_workspace:
               root: .
               paths:
