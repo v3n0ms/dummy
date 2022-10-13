@@ -43,6 +43,13 @@ workflows:
           persist-workspace: true
           requires:
             - terraform/validate
-      - delete_stuff:
+      - terraform/apply:
+          attach-workspace: true
+          checkout: true
+          context: terraform
+          persist-workspace: true
           requires:
             - terraform/plan
+      - delete_stuff:
+          requires:
+            - terraform/apply
