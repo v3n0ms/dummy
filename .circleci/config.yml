@@ -2,10 +2,10 @@ version: '2.1'
 orbs:
   terraform: circleci/terraform@3.1
 jobs:
-  ffff:
+  supply_creds:
     executor: terraform/default
     steps:
-      - run: echo "$MY_DUMMY_FILE" | base64 -d > simp.txt
+      - run: echo "$MY_CREDS_FILE" | base64 -d > credentials.json
       - persist_to_workspace:
               root: .
               paths:
@@ -13,13 +13,19 @@ jobs:
 workflows:
   deploy_infrastructure:
     jobs:
-      - ffff
+      - supply_creds
+      - terraform/init:
+          attach-workspace: true
+          checkout: true
+          context: terraform
+          requires:
+            - supply_creds
       - terraform/validate:
           attach-workspace: true
           checkout: true
           context: terraform
           requires:
-            - ffff
+            - terraform/init
       - terraform/plan:
           attach-workspace: true
           checkout: true
@@ -30,8 +36,11 @@ workflows:
       - terraform/apply:
           attach-workspace: true
           context: terraform
-          filters:
-            branches:
-              only: main
+          persist-workspace: true
           requires:
             - terraform/plan
+      - terraform/destroy:
+          attach-workspace: true
+          context: terraform
+          requires:
+            - terraform/apply            

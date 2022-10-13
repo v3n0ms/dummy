@@ -1,4 +1,5 @@
 provider "google" {
-  project     = "retail-pos-bfe9"
+  credentials = file("credentials.json")
+  project     = "daring-cache-365406"
   region      = "asia-south1"
 }
