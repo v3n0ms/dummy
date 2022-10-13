@@ -10,16 +10,16 @@ jobs:
               root: .
               paths:
                 - .
-  delete_stuff:
-    executor: terraform/default
-    steps:
-      - attach_workspace:
-          at: .
-      - run: ls -la
-      - persist_to_workspace:
-              root: .
-              paths:
-                - .
+  # delete_stuff:
+  #   executor: terraform/default
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run: ls -la
+  #     - persist_to_workspace:
+  #             root: .
+  #             paths:
+  #               - .
 workflows:
   deploy_infrastructure:
     jobs:
@@ -43,9 +43,8 @@ workflows:
           persist-workspace: true
           requires:
             - terraform/validate
-      - delete_stuff
       - terraform/destroy:
           attach-workspace: true
           context: terraform
           requires:
-            - delete_stuff         
+            - terraform/plan      
