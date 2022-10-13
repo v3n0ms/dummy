@@ -54,3 +54,4 @@ workflows:
       - delete_stuff:
           requires:
             - terraform/apply
+          type: approval
