@@ -10,7 +10,7 @@ jobs:
               root: .
               paths:
                 - .
-  delete_stuff:
+  terraform_destroy:
     executor: terraform/default
     steps:
       - attach_workspace:
@@ -53,11 +53,11 @@ workflows:
           context: terraform
           persist-workspace: true
           requires:
-            - terraform/plan
+            - hold-apply
       - hold-destroy:
           type: approval
           requires:
             - terraform/apply
-      - delete_stuff:
+      - terraform_destroy:
           requires:
-            - terraform/apply
+            - hold-destroy
