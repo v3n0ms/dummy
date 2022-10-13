@@ -1,7 +1,7 @@
 resource "google_compute_instance" "default" {
   name         = "retail-pos-helloworld"
   machine_type = "f1-micro"
-  zone         = "asia-south1-c"
+  zone         = "us-east4-b"
 
   boot_disk {
     initialize_params {
