@@ -43,11 +43,6 @@ workflows:
           persist-workspace: true
           requires:
             - terraform/validate
-      - delete_stuff
+      - delete_stuff:
           requires:
             - terraform/plan
-      # - terraform/destroy:
-      #     attach-workspace: true
-      #     context: terraform
-      #     requires:
-      #       - delete_stuff         
