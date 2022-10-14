@@ -8,6 +8,6 @@ terraform {
   backend "gcs" {
     bucket      = "demo-bucket-dummy-00"
     prefix  = "terraform/state"
-    credentials = "${file("gcs.json")}"
+    credentials = "gcs.json"
   }
 }
