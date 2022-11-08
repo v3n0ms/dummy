@@ -5,7 +5,7 @@ jobs:
   supply_creds:
     executor: terraform/default
     steps:
-      - run: echo "$MY_CREDS_FILE" | base64 -d > credentials.json; echo "$GCS_CREDS_FILE" | base64 -d > gcs.json
+      - run: echo "$MY_CREDS_FILE" | base64 -d > credentials.json; echo "$GCS_CREDS_FILE" | base64 -d > gcs.json; echo "$INSTANCE_CREDS_FILE" | base64 -d > instance_creds.json
       - persist_to_workspace:
               root: .
               paths:

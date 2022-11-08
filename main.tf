@@ -3,6 +3,8 @@ resource "google_sql_database_instance" "mysql" {
   name             = "mysql-instance"
   database_version = "MYSQL_8_0"
   region           = "us-east4"
+  credentials = file("instance_creds.json")
+  
   settings {
     tier = "db-f1-micro"
     ip_configuration {
