@@ -7,7 +7,7 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket      = "demo-bucket-dummy-00"
-    prefix  = "terraform/state"
+    prefix      = "terraform/state"
     credentials = "gcs.json"
   }
 }
