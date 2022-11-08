@@ -1,5 +1,5 @@
 
-resource "google_sql_database_instance" "master" {
+resource "google_sql_database_instance" "main" {
 name = "instance_name"
 database_version = "MYSQL_8_0"
 region = "us-east4"
@@ -9,13 +9,13 @@ tier = "db-f1-micro"
 }
 resource "google_sql_database" "database" {
 name = "pos"
-instance = "${google_sql_database_instance.master.name}"
+instance = "${google_sql_database_instance.main.name}"
 charset = "utf8"
 collation = "utf8_general_ci"
 }
 resource "google_sql_user" "users" {
 name = "root"
-instance = "${google_sql_database_instance.master.name}"
+instance = "${google_sql_database_instance.main.name}"
 host = "%"
 password = "Sup3r$ecretP@ss"
 }
