@@ -1,7 +1,7 @@
 
 resource "google_sql_database_instance" "master" {
 name = "instance_name"
-database_version = "MYSQL_8"
+database_version = "MYSQL_8_0"
 region = "us-east4"
 settings {
 tier = "db-f1-micro"
