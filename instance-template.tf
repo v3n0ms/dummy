@@ -1,6 +1,8 @@
 resource "google_compute_instance_template" "template" {
   name         = "pos-instance-template"
   machine_type = "f1-micro"
+  project     = "dummy-project-365407"
+  region      = "us-east4"
 
   disk {
     source_image = "debian-cloud/debian-11"
