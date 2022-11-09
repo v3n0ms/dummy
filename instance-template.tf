@@ -1,7 +1,6 @@
 resource "google_compute_instance_template" "template" {
   name         = "pos-instance-template"
   machine_type = "f1-micro"
-  credentials  = file("instance_creds.json")
 
   disk {
     source_image = "debian-cloud/debian-11"
