@@ -1,3 +1,8 @@
+provider "google" {
+  credentials = file("database_creds.json")
+  project     = "dummy-project-365407"
+  region      = "us-east4"
+}
 
 resource "google_sql_database_instance" "mysql" {
   name             = "mysql-instance"
