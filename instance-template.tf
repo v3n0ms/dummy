@@ -34,6 +34,20 @@ module "gce-container" {
   restart_policy = "Always"
 }
 
+resource "google_compute_firewall" "http-server" {
+
+  name    = "default-allow-http-terraform"
+  network = google_compute_network.default.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "22", "8080"]
+  }
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
+
+}
+
 resource "google_compute_instance_template" "template" {
   name         = "pos-instance-template"
   machine_type = "f1-micro"
@@ -59,6 +73,8 @@ resource "google_compute_instance_template" "template" {
   labels = {
     container-vm = module.gce-container.vm_container_label
   }
+
+  tags = ["http-server"]
 
   # secret default
   service_account {
