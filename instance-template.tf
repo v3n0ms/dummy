@@ -3,36 +3,6 @@ data "google_compute_image" "coreos" {
   project = "cos-cloud"
 }
 
-module "gce-container" {
-  source  = "terraform-google-modules/container-vm/google"
-  version = "~> 2.0"
-
-  container = {
-    image   = "asia.gcr.io/dummy-project-365407/pos"
-    command = ""
-    env = [
-      {
-        name  = "DB_HOST",
-        value = "34.150.222.6"
-      },
-      {
-        name  = "DB_NAME",
-        value = "pos"
-      },
-      {
-        name  = "DB_USER",
-        value = "root"
-      },
-      {
-        name  = "DB_PASSWORD",
-        value = "Sup3r$ecretP@ss"
-      }
-    ]
-
-  }
-
-  restart_policy = "Always"
-}
 
 resource "google_compute_firewall" "http-server" {
 
@@ -66,13 +36,7 @@ resource "google_compute_instance_template" "template" {
 
   }
 
-  metadata = {
-    gce-container-declaration = module.gce-container.metadata_value
-  }
-
-  labels = {
-    container-vm = module.gce-container.vm_container_label
-  }
+  metadata_startup_script= "bash ./script.sh"
 
   tags = ["http-server"]
 
