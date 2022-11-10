@@ -1,8 +1,20 @@
+data "google_compute_image" "coreos" {
+
+  name = "cos"
+
+  family = "stable"
+
+  project = "cos-cloud"
+
+}
+
+
+
 resource "google_compute_instance_template" "template" {
   name         = "pos-instance-template"
   machine_type = "f1-micro"
-  project     = "dummy-project-365407"
-  region      = "us-west2"
+  project      = "dummy-project-365407"
+  region       = "us-west2"
 
   disk {
     source_image = "cos-stable"

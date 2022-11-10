@@ -18,18 +18,18 @@ resource "google_compute_instance_group_manager" "appserver" {
   zone               = "us-west2-a"
 
   version {
-    instance_template  = google_compute_instance_template.template.id
+    instance_template = google_compute_instance_template.template.id
   }
 
 
 
-#   target_pools = [google_compute_target_pool.appserver.id]
-  target_size  = 1
+  #   target_pools = [google_compute_target_pool.appserver.id]
+  target_size = 1
 
 
 
-#   auto_healing_policies {
-#     health_check      = google_compute_health_check.autohealing.id
-#     initial_delay_sec = 300
-#   }
+  #   auto_healing_policies {
+  #     health_check      = google_compute_health_check.autohealing.id
+  #     initial_delay_sec = 300
+  #   }
 }
