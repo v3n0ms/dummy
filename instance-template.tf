@@ -5,7 +5,7 @@ resource "google_compute_instance_template" "template" {
   region      = "us-west2"
 
   disk {
-    source_image = "cos-101-17162-40-16"
+    source_image = "cos-101-lts"
   }
 
   network_interface {
