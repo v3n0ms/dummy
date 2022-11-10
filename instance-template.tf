@@ -36,7 +36,7 @@ resource "google_compute_instance_template" "template" {
 
   }
 
-  metadata_startup_script= "bash ./script.sh"
+  metadata_startup_script= "${file("script.sh")}"
 
   tags = ["http-server"]
 
