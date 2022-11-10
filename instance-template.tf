@@ -48,16 +48,16 @@ resource "google_compute_instance_template" "template" {
     network = google_compute_network.default.name
 
     # secret default
-    access_config {
+    access_config {}
 
-    }
-    metadata = {
-      gce-container-declaration = module.gce-container.metadata_value
-    }
+  }
 
-    labels = {
-      container-vm = module.gce-container.vm_container_label
-    }
+  metadata = {
+    gce-container-declaration = module.gce-container.metadata_value
+  }
+
+  labels = {
+    container-vm = module.gce-container.vm_container_label
   }
 
   # secret default
