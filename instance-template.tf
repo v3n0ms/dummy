@@ -34,20 +34,21 @@ resource "google_compute_instance_template" "template" {
   metadata_startup_script = <<-EOF
 #!/bin/bash
 
-sudo apt-get install apt-transport-https ca-certificates gnupg  curl lsb-release 
+sudo apt-get install apt-transport-https ca-certificates gnupg  curl lsb-release -y
 sudo mkdir -p /etc/apt/keyrings 
 sudo echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+sudo apt-get update -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg 
 sudo echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list 
 sudo echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list 
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - 
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
-sudo apt-get update && sudo apt-get install google-cloud-cli 
+sudo apt-get update && sudo apt-get install google-cloud-cli  -y
 
 gcloud auth activate-service-account --key-file=credentials.json 
 
