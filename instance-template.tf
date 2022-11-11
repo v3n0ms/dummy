@@ -20,7 +20,7 @@ resource "google_compute_instance_template" "template" {
   region       = "us-west2"
 
   disk {
-    source_image = "debaian-cloud/debian-11"
+    source_image = "debian-cloud/debian-11"
   }
 
   network_interface {
