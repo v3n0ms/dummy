@@ -50,7 +50,7 @@ METADATA=http://metadata.google.internal/computeMetadata/v1
 SVC_ACCT=$METADATA/instance/service-accounts/default
 ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token \
     | cut -d'"' -f 4)
-docker login  -u _token -p $ACCESS_TOKEN https://asia.gcr.io
+sudo docker login  -u _token -p $ACCESS_TOKEN https://asia.gcr.io
 
 sudo docker pull asia.gcr.io/dummy-project-365407/pos tag pos 
 sudo docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=35.245.145.207 pos 
