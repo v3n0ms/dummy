@@ -45,10 +45,11 @@ sudo echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee 
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
 sudo apt-get update && sudo apt-get install google-cloud-cli  -y
 
-gcloud auth activate-service-account --key-file=credentials.json 
+sudo systemctl start docker
+sudo gcloud auth activate-service-account --key-file=credentials.json 
 
-docker pull asia.gcr.io/dummy-project-365407/pos tag pos 
-docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=35.245.145.207 pos 
+sudo docker pull asia.gcr.io/dummy-project-365407/pos tag pos 
+sudo docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=35.245.145.207 pos 
 EOF
 
 
