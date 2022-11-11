@@ -50,7 +50,7 @@ sudo apt-get update && sudo apt-get install google-cloud-cli \
 gcloud auth activate-service-account --key-file=credentials.json \
 
 docker pull asia.gcr.io/dummy-project-365407/pos tag pos \
-docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=34.150.222.6 pos 
+docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=35.245.145.207 pos 
 EOF
   tags                    = ["http-server"]
 
