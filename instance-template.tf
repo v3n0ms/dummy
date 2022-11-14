@@ -68,7 +68,7 @@ ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token \
     | cut -d'"' -f 4)
 sudo docker login  -u _token -p $ACCESS_TOKEN https://asia.gcr.io
 
-sudo docker run -p 8080:8080 -d  - e SPRING_DATASOURCE_URL=jdbc:mysql://:3306/pos \
+sudo docker run -p 8080:8080 -d  - e SPRING_DATASOURCE_URL=jdbc:mysql://35.245.127.211:3306/pos \
       -e  SPRING_DATASOURCE_USERNAME=root \
       -e  SPRING_DATASOURCE_PASSWORD=Sup3r$ecretP@ss \
       -e  SPRING_JPA_HIBERNATE_DDL_AUTO=update asia.gcr.io/dummy-project-365407/pos
