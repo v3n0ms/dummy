@@ -68,7 +68,7 @@ ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token \
     | cut -d'"' -f 4)
 sudo docker login  -u _token -p $ACCESS_TOKEN https://asia.gcr.io
 
-sudo docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3rp4ss -e DB_HOST=34.150.220.24 asia.gcr.io/dummy-project-365407/pos
+sudo docker run -p 8080:8080 -d -e DB_USER=${local.envs["DB_USER"]} -e DB_NAME=${local.envs["DB_NAME"]} -e DB_PASSWORD=${local.envs["DB_PASSWORD"]} -e DB_HOST=${local.envs["DB_HOST"]} asia.gcr.io/dummy-project-365407/pos
 EOF
 
 
