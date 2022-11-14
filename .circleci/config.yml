@@ -7,11 +7,10 @@ jobs:
     steps:
       - run: 
           command: |
-          echo "$MY_CREDS_FILE" | base64 -d > database_creds.json
-          echo "$GCS_CREDS_FILE" | base64 -d > gcs.json
-          echo "$INSTANCE_CREDS_FILE" | base64 -d > credentials.json
-          echo "$MY_ENV_VARS" | base64 -d > .env
-
+            echo "$MY_CREDS_FILE" | base64 -d > database_creds.json
+            echo "$GCS_CREDS_FILE" | base64 -d > gcs.json
+            echo "$INSTANCE_CREDS_FILE" | base64 -d > credentials.json
+            echo "$MY_ENV_VARS" | base64 -d > .env
       - persist_to_workspace:
               root: .
               paths:
