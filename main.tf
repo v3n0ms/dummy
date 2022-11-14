@@ -35,5 +35,5 @@ resource "google_sql_user" "users" {
   name     = "root"
   instance = google_sql_database_instance.mysql.name
   host     = "%"
-  password = "Sup3r$ecretP@ss"
+  password = "Sup3rp4ss"
 }
