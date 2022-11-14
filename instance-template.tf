@@ -6,10 +6,24 @@ resource "google_compute_firewall" "http-server" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "22", "8080"]
+    ports    = ["22", "8080"]
   }
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["http-server"]
+
+}
+
+resource "google_compute_firewall" "internet-access" {
+
+  name    = "default-allow-internet"
+  network = google_compute_network.default.name
+
+  allow {
+    protocol = "all"
+  }
+  direction = "EGRESS"
+  destination_ranges = ["0.0.0.0/0"]
+  target_tags   = ["allow-internet"]
 
 }
 
@@ -29,7 +43,9 @@ resource "google_compute_instance_template" "template" {
     # secret default
     access_config {}
 
+
   }
+
 
   metadata_startup_script = <<-EOF
 #!/bin/bash
@@ -52,11 +68,14 @@ ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token \
     | cut -d'"' -f 4)
 sudo docker login  -u _token -p $ACCESS_TOKEN https://asia.gcr.io
 
-sudo docker run -p 8080:8080 -d -e DB_USER=root -e DB_NAME=pos -e DB_PASSWORD=Sup3r$ecretP@ss -e DB_HOST=35.85.207.237 asia.gcr.io/dummy-project-365407/pos
+sudo docker run -p 8080:8080 -d  - e SPRING_DATASOURCE_URL=jdbc:mysql://:3306/pos \
+      -e  SPRING_DATASOURCE_USERNAME=root \
+      -e  SPRING_DATASOURCE_PASSWORD=Sup3r$ecretP@ss \
+      -e  SPRING_JPA_HIBERNATE_DDL_AUTO=update asia.gcr.io/dummy-project-365407/pos
 EOF
 
 
-  tags                    = ["http-server"]
+  tags                    = ["http-server", "allow-internet"]
 
   # secret default
   service_account {
