@@ -33,7 +33,7 @@ resource "google_sql_database_instance" "mysql" {
     tier = "db-f1-micro"
     ip_configuration {
       ipv4_enabled = false
-      private_network = "projects/dummy-project-365407/global/networks/${google_compute_network.default.name}"
+      private_network = "${google_compute_network.default.name}"
     }
   }
 }
