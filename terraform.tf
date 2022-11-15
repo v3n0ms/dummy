@@ -5,7 +5,7 @@ provider "google" {
 }
 
 provider "google-beta" {
-  credentials = file("credentials.json")
+  credentials = file("network.json")
   project     = "dummy-project-365407"
   region      = "us-east4"
 }
