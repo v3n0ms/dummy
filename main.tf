@@ -15,10 +15,8 @@ resource "google_sql_database_instance" "mysql" {
   settings {
     tier = "db-f1-micro"
     ip_configuration {
-      ipv4_enabled = true
-      authorized_networks {
-        value = "0.0.0.0/0"
-      }
+      ipv4_enabled = false
+      private_network = google_compute_network.default.id
     }
   }
 }
@@ -32,8 +30,13 @@ resource "google_sql_database" "database" {
 }
 resource "google_sql_user" "users" {
   provider = google.db
-  name     = "root"
+  name     = local.envs["USER"]
   instance = google_sql_database_instance.mysql.name
   host     = "%"
-  password = "Sup3rp4ss"
+  password = local.envs["PASSWORD"]
+}
+
+output "instance_ip_addr" {
+  value       = google_sql_database_instance.private_network.id
+  description = "The private IP address of the main server instance."
 }
