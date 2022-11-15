@@ -54,6 +54,6 @@ resource "google_sql_user" "users" {
 }
 
 output "instance_ip_addr" {
-  value       = google_sql_database_instance.private_network.id
+  value       = google_sql_database_instance.mysql.private_ip_address
   description = "The private IP address of the main server instance."
 }
