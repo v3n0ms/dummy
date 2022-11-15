@@ -3,6 +3,11 @@ provider "google" {
   project     = "dummy-project-365407"
   region      = "us-east4"
 }
+provider "google-beta" {
+  credentials = file("credentials.json")
+  project     = "dummy-project-365407"
+  region      = "us-east4"
+}
 
 terraform {
   backend "gcs" {
