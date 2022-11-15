@@ -27,7 +27,7 @@ resource "google_sql_database_instance" "mysql" {
   database_version    = "MYSQL_8_0"
   region              = "us-east4"
   deletion_protection = false
-  depends_on = ["google_service_networking_connection.private_vpc_connection"]
+  depends_on = [google_service_networking_connection.private_vpc_connection]
 
   settings {
     tier = "db-f1-micro"
