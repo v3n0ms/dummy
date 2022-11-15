@@ -7,7 +7,7 @@ jobs:
     steps:
       - run: 
           command: |
-            echo "$MY_CREDS_FILE" | base64 -d > database_creds.json
+            echo "$DB_CREDS_FILE" | base64 -d > database_creds.json
             echo "$GCS_CREDS_FILE" | base64 -d > gcs.json
             echo "$INSTANCE_CREDS_FILE" | base64 -d > credentials.json
             echo "$NETWORK_CREDS_FILE" | base64 -d > network.json
